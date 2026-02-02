@@ -5,7 +5,7 @@ import (
 	"go.uber.org/zap"
 )
 
-var Prot string
+var Port string
 var Username string
 var Password string
 var LoginIntervalTime int

@@ -39,7 +39,7 @@ update:
 ### 2.启动应用
 
 ```shell
-$ ./China_Telecom_Monitor_amd64 --prot 8081 --username '电信账号' --password '电信密码'
+$ ./China_Telecom_Monitor_amd64 --port 8081 --username '电信账号' --password '电信密码'
 ```
 
 ### 3.测试访问
@@ -110,8 +110,8 @@ Usage of ./China_Telecom_Monitor_amd64:
     	--loginIntervalTime 43200 #电信登录间隔时间（防止被封号），秒 (default 43200)
   -password string
     	--password xxxxx #电信账号密码, 必填
-  -prot string
-    	--prot 8080 (default "8080")
+  -port string
+    	--port 8080 (default "8080")
   -timeOut int
     	--timeOut 30 #访问电信接口请求超时时间，秒 (default 30)
   -username string
@@ -146,7 +146,7 @@ curl http://127.0.0.1:8081/show/flowPackage （已无法使用）
 
 下面是结合 `nohup` 后的启动命令，这样就能保证大家退出服务器后，服务仍然在运行
 ```
-$ nohup ./China_Telecom_Monitor_amd64 --prot 8081 --username '电信账号' --password '电信密码' >/dev/null &
+$ nohup ./China_Telecom_Monitor_amd64 --port 8081 --username '电信账号' --password '电信密码' >/dev/null &
 ```
 
 **异常情况**

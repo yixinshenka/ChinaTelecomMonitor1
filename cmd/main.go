@@ -44,7 +44,7 @@ func main() {
 
 // 初始化配置
 func initFlag() {
-	flag.StringVar(&configs.Prot, "prot", "8080", "--prot 8080")
+	flag.StringVar(&configs.Port, "port", "8080", "--port 8080")
 	flag.StringVar(&configs.Username, "username", "", "--username 1xxxxxxxxxx #电信账号用户名, 必填")
 	flag.StringVar(&configs.Password, "password", "", "--password xxxxx #电信账号密码, 必填")
 	flag.IntVar(&configs.LoginIntervalTime, "loginIntervalTime", 43200, "--loginIntervalTime 43200 #电信登录间隔时间（防止被封号），秒")
@@ -190,7 +190,7 @@ func initIris() {
 		irisApp.Handle(iris.MethodGet, "/show/userFluxPackage", userFluxPackage)
 
 	}
-	err := irisApp.Run(iris.Addr(":" + configs.Prot))
+	err := irisApp.Run(iris.Addr(":" + configs.Port))
 	if err != nil {
 		configs.Logger.Error("InitIris error", err)
 	}
