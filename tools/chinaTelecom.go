@@ -225,7 +225,7 @@ func post[C, D any](requestUrl string, requestBody models.Request[C], mobile, pa
 	req.Header.Add("Accept", "application/json")
 	req.Header.Add("Content-Type", "application/json; charset=UTF-8")
 	req.Header.Add("Connection", "Keep-Alive")
-	req.Header.Add("Accept-Encoding", "gzip")
+	//req.Header.Add("Accept-Encoding", "gzip")
 	response, err := http.DefaultClient.Do(req)
 	if err != nil {
 		configs.Logger.Error("request url: ", requestUrl, " body: ", body, err)
