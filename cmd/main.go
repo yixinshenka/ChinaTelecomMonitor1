@@ -188,6 +188,8 @@ func initIris() {
 
 		irisApp.Handle(iris.MethodGet, "/show/qryImportantData", qryImportantData)
 		irisApp.Handle(iris.MethodGet, "/show/userFluxPackage", userFluxPackage)
+
+		irisApp.Handle(iris.MethodGet, "/show/packageDetail", getPackageDetail)
 	}
 	err := irisApp.Run(iris.Addr(":" + configs.Prot))
 	if err != nil {
@@ -257,6 +259,16 @@ func userFluxPackage(ctx iris.Context) {
 		return
 	}
 	userFluxPackageDetailRequest = tools.GetUserFluxPackage(configs.Username, configs.Password)
+	userFluxPackageVisitLastTime = carbon.Now()
+	ctx.JSON(&userFluxPackageDetailRequest)
+}
+
+func getPackageDetail(ctx iris.Context) {
+	if carbon.Now().Lt(userFluxPackageVisitLastTime.AddSeconds(configs.IntervalsTime)) {
+		ctx.JSON(&userFluxPackageDetailRequest)
+		return
+	}
+	userFluxPackageDetailRequest = tools.GetPackageDetail(configs.Username, configs.Password)
 	userFluxPackageVisitLastTime = carbon.Now()
 	ctx.JSON(&userFluxPackageDetailRequest)
 }
