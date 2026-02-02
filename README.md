@@ -15,7 +15,7 @@
 
 fix:
 - 修复 登录报错问题 [#issues32](https://github.com/LambdaExpression/ChinaTelecomMonitor/issues/32)
-- 修复 port 拼写错误问题 , prot 修正为 port [#issues29](https://github.com/LambdaExpression/ChinaTelecomMonitor/issues/29)
+- 修复 port 拼写错误问题 , **端口指定变量 prot 修正为 port** [#issues29](https://github.com/LambdaExpression/ChinaTelecomMonitor/issues/29)
 
 **v2.0.2**
 
