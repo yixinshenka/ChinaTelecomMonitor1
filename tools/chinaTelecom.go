@@ -163,31 +163,6 @@ func GetUserFluxPackage(mobile, password string) *models.Result[models.UserFluxP
 	return &result
 }
 
-func GetPackageDetail(mobile, password string) *models.Result[models.UserFluxPackageData] {
-	t := time.Now().Format("20060102150400")
-	rb := models.Request[models.UserFluxPackageRequestContent]{
-		Content: models.UserFluxPackageRequestContent{
-			FieldData: models.UserFluxPackageRequestFieldData{
-				QueryFlag:  "0",
-				AccessAuth: "1",
-				Account:    transPhone(mobile),
-			},
-			Attach: "test",
-		},
-		HeaderInfos: initHeaderInfos(mobile, "userFluxPackage", t),
-	}
-
-	requestUrl := "https://e.dlife.cn/user/package_detail.do"
-
-	result, err := post[models.UserFluxPackageRequestContent, models.UserFluxPackageData](requestUrl, rb, mobile, password, true, false)
-	if err != nil {
-		configs.Logger.Error("login post error", err)
-		return nil
-	}
-
-	return &result
-}
-
 func initHeaderInfos(mobile, code, t string) models.RequestHeaderInfos {
 	if t == "" {
 		t = time.Now().Format("20060102150400")
