@@ -263,13 +263,16 @@ func userFluxPackage(ctx iris.Context) {
 	ctx.JSON(&userFluxPackageDetailRequest)
 }
 
+var packageDetailVisitLastTime carbon.Carbon
+var packageDetailRequest *models.Result[models.UserFluxPackageData]
+
 func getPackageDetail(ctx iris.Context) {
-	if carbon.Now().Lt(userFluxPackageVisitLastTime.AddSeconds(configs.IntervalsTime)) {
-		ctx.JSON(&userFluxPackageDetailRequest)
+	if carbon.Now().Lt(packageDetailVisitLastTime.AddSeconds(configs.IntervalsTime)) {
+		ctx.JSON(&packageDetailRequest)
 		return
 	}
-	userFluxPackageDetailRequest = tools.GetPackageDetail(configs.Username, configs.Password)
-	userFluxPackageVisitLastTime = carbon.Now()
+	packageDetailRequest = tools.GetPackageDetail(configs.Username, configs.Password)
+	packageDetailVisitLastTime = carbon.Now()
 	ctx.JSON(&userFluxPackageDetailRequest)
 }
 
