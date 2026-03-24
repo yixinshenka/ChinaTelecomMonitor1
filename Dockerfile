@@ -1,8 +1,8 @@
 FROM alpine:latest
 WORKDIR /app
 
-# 安装 unzip 工具（因为是 zip 格式）
-RUN apk add --no-cache unzip
+# 安装 unzip 和 curl（解决解压和 curl 依赖问题）
+RUN apk add --no-cache unzip curl
 
 # 复制并解压 zip 文件
 COPY China_Telecom_Monitor_amd64.zip /app/
