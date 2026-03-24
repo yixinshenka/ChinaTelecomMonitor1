@@ -1,11 +1,22 @@
 FROM alpine:latest
 WORKDIR /app
-# 安装依赖
 RUN apk add --no-cache unzip curl
-# 复制你仓库里的压缩包，强制解压避免卡住
+# 复制你仓库里的zip包
 COPY China_Telecom_Monitor_amd64.zip .
-RUN unzip -o China_Telecom_Monitor_amd64.zip && chmod +x China_Telecom_Monitor_amd64
-# 端口和 Railway 保持一致 8081
+# 解压，然后打印解压后的文件，确认二进制文件存在
+RUN unzip -o China_Telecom_Monitor_amd64.zip && ls -la && chmod +x China_Telecom_Monitor_amd64
 EXPOSE 8081
-# 单行命令，避免构建语法错误，自带崩溃自动重启
-CMD /bin/sh -c 'while true; do ./China_Telecom_Monitor_amd64 --port 8081 --username "$USERNAME" --password "$PASSWORD" --dev true; sleep 2; done'
+# 调试用的启动命令：打印所有信息，看看到底卡在哪
+CMD /bin/sh -c '
+echo "=== 当前目录文件列表 ==="
+ls -la
+echo "=== 检查二进制文件权限 ==="
+ls -l China_Telecom_Monitor_amd64
+echo "=== 检查环境变量 ==="
+echo "USERNAME: $USERNAME"
+echo "PASSWORD: $PASSWORD"
+echo "=== 开始启动程序 ==="
+./China_Telecom_Monitor_amd64 --port 8081 --username "$USERNAME" --password "$PASSWORD" --dev true
+echo "=== 程序异常退出，错误码: $? ==="
+sleep 30
+'
