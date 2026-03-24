@@ -8,5 +8,5 @@ RUN apk add --no-cache unzip curl
 COPY China_Telecom_Monitor_amd64.zip /app/
 RUN unzip China_Telecom_Monitor_amd64.zip && chmod +x China_Telecom_Monitor_amd64
 
-EXPOSE 8080
-CMD ["./China_Telecom_Monitor_amd64", "--port", "8080", "--dev", "true"]
+EXPOSE 8081
+CMD ["./China_Telecom_Monitor_amd64", "--port", "8081", "--dev", "true"]
