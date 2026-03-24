@@ -9,4 +9,5 @@ COPY China_Telecom_Monitor_amd64.zip /app/
 RUN unzip China_Telecom_Monitor_amd64.zip && chmod +x China_Telecom_Monitor_amd64
 
 EXPOSE 8081
-CMD ["./China_Telecom_Monitor_amd64", "--port", "8081", "--dev", "true"]
+# 完整启动命令（包含端口、账号密码、开发模式）
+CMD ["./China_Telecom_Monitor_amd64", "--port", "8081", "--username", "$USERNAME", "--password", "$PASSWORD", "--dev", "true"]
